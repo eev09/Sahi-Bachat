@@ -1,0 +1,5 @@
+{
+  "name": "Sahi Bachat",
+  "description": "Awareness app for Indian government schemes for low-income individuals with voice assistant and community forum.",
+  "requestFramePermissions": ["microphone"]
+}

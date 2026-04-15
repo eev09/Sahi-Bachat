@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // PUBLIC RULES FOR DEMO PURPOSES
+    // This allows the app to function without a formal authentication process
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

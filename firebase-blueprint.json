@@ -1,0 +1,94 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "User's full name" },
+        "phoneNumber": { "type": "string", "description": "User's phone number" },
+        "language": { "type": "string", "description": "Preferred language code" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Account creation timestamp" }
+      },
+      "required": ["name", "phoneNumber", "language", "createdAt"]
+    },
+    "ForumPost": {
+      "title": "ForumPost",
+      "description": "A post in the community forum",
+      "type": "object",
+      "properties": {
+        "authorId": { "type": "string", "description": "UID of the author" },
+        "authorName": { "type": "string", "description": "Name of the author" },
+        "title": { "type": "string", "description": "Title of the post" },
+        "content": { "type": "string", "description": "Content of the post" },
+        "upvotes": { "type": "number", "description": "Number of upvotes" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Post creation timestamp" }
+      },
+      "required": ["authorId", "authorName", "title", "content", "upvotes", "createdAt"]
+    },
+    "ForumComment": {
+      "title": "ForumComment",
+      "description": "A comment on a forum post",
+      "type": "object",
+      "properties": {
+        "postId": { "type": "string", "description": "ID of the parent post" },
+        "authorId": { "type": "string", "description": "UID of the author" },
+        "authorName": { "type": "string", "description": "Name of the author" },
+        "content": { "type": "string", "description": "Content of the comment" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Comment creation timestamp" }
+      },
+      "required": ["postId", "authorId", "authorName", "content", "createdAt"]
+    },
+    "Workshop": {
+      "title": "Workshop",
+      "description": "Information about a workshop",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Title of the workshop" },
+        "description": { "type": "string", "description": "Description of the workshop" },
+        "date": { "type": "string", "description": "Date of the workshop" },
+        "location": { "type": "string", "description": "Location of the workshop" },
+        "formLink": { "type": "string", "description": "Link to the registration form" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Workshop post timestamp" }
+      },
+      "required": ["title", "description", "date", "location", "createdAt"]
+    },
+    "TrackedScheme": {
+      "title": "TrackedScheme",
+      "description": "A government scheme being tracked by a user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID of the user" },
+        "schemeName": { "type": "string", "description": "Name of the scheme" },
+        "description": { "type": "string", "description": "Description of the scheme" },
+        "reason": { "type": "string", "description": "Reason for recommendation" },
+        "status": { "type": "string", "enum": ["not_started", "pending", "submitted", "approved"], "description": "Application status" },
+        "lastUpdated": { "type": "string", "description": "Last updated label" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Tracking start timestamp" }
+      },
+      "required": ["userId", "schemeName", "description", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/forumPosts/{postId}": {
+      "schema": "ForumPost",
+      "description": "Community forum posts"
+    },
+    "/forumPosts/{postId}/comments/{commentId}": {
+      "schema": "ForumComment",
+      "description": "Comments on forum posts"
+    },
+    "/workshops/{workshopId}": {
+      "schema": "Workshop",
+      "description": "Workshop updates"
+    },
+    "/ApplicationTracker/{schemeId}": {
+      "schema": "TrackedScheme",
+      "description": "Schemes tracked by users"
+    }
+  }
+}
